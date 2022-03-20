@@ -2,8 +2,15 @@
 
 echo "Installing dependencies..."
 pip install -r requirements.txt
-echo "Setting credentials..."
-source .env
+
+read -p "Enter spotipy client ID" client
+read -p "Enter spotipy client secret" secret
+
+client_label="os.getenv('CLIENT_ID','')"
+secret_label="os.getenv('SECRET','')"
+
+sed -i "s/${client_label}/${client}/g" spotipy-test.py
+sed -i "s/${secret_label}/${secret}/g" spotipy-test.py
 
 chmod +x play
 chmod +x pp
